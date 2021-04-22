@@ -16,7 +16,7 @@ config :murder_she_wrote, MurderSheWroteWeb.Endpoint,
   secret_key_base: "h+C7EZYaOUH+IhmpPdsiTYc4p8MBYKsFrJIqqJnv8CKlw0vGtsQux1YlNJ99nyN1",
   render_errors: [view: MurderSheWroteWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MurderSheWrote.PubSub,
-  live_view: [signing_salt: "qb3RnLr4"]
+  live_view: [signing_salt: "Ta2tUoJvChS/4Tnxmj62BhAQCE7Ernlj"]
 
 # Configures Elixir's Logger
 config :logger, :console,

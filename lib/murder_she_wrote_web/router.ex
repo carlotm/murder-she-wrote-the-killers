@@ -1,26 +1,17 @@
 defmodule MurderSheWroteWeb.Router do
   use MurderSheWroteWeb, :router
 
-  pipeline :browser do
+  pipeline :browser_live do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
+    plug :put_root_layout, {MurderSheWroteWeb.LayoutView, :app}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", MurderSheWroteWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
+    pipe_through :browser_live
+    live("/", EpisodesLive)
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", MurderSheWroteWeb do
-  #   pipe_through :api
-  # end
 end
