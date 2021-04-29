@@ -12,7 +12,7 @@ config :murder_she_wrote,
 
 # Configures the endpoint
 config :murder_she_wrote, MurderSheWroteWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "127.0.0.1"],
   secret_key_base: "h+C7EZYaOUH+IhmpPdsiTYc4p8MBYKsFrJIqqJnv8CKlw0vGtsQux1YlNJ99nyN1",
   render_errors: [view: MurderSheWroteWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MurderSheWrote.PubSub,
