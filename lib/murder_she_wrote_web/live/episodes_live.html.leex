@@ -1,79 +1,16 @@
-<section class="Filters">
-  <form class="Filters-q" phx-change="filter">
-    <div class="Filters-filter">
-      <label for="q">Filter episodes by title</label>
-      <input
-        id="q"
-        name="q"
-        type="text"
-        placeholder="Word..."
-        value="<%= @q %>"
-        autocomplete="off"
-        phx-debounce="200" />
-    </div>
-    <div class="Filters-filter Filters-filter--checks">
-      <h3>Filter episodes by season</h3>
-      <input type="hidden" value="" name="seasons[]">
-      <%= for s <- @seasons do %>
-        <input type="checkbox" name="seasons[]" id="s<%= s.number %>" value="<%= s.number %>"
-          <%= if "#{s.number}" in @selected_seasons, do: "checked" %>/>
-        <label for="s<%= s.number %>"><%= s.number %></label>
-      <% end %>
-    </div>
-  </form>
-  <%= if @loading do %>
-    <section class="Spinner"></section>
-  <% end %>
-</section>
+<%= render(
+  MurderSheWroteWeb.EpisodesView,
+  "filters.html",
+  q: @q,
+  seasons: @seasons,
+  selected_seasons: @selected_seasons,
+  loading: @loading
+) %>
 
-<section class="Episodes">
-  <%= for e <- @filtered do %>
-    <article class="Episode <%= if @killer && e.id == @killer.episode_id, do: "Episode-reveal" %>">
-      <div class="Episode-front">
-        <%= if e.poster != "" do %>
-          <div
-            phx-track-static
-            class="Episode-poster"
-            style="background-image: url('<%= Routes.static_path(@socket, "/images/covers/#{e.poster}") %>')"
-          ></div>
-        <% end %>
-        <header>
-          <h2 class="Episode-title"><%= e.title %></h2>
-        </header>
-        <section>
-          <input
-            id="episode-<%= e.id %>-plot"
-            type="checkbox"
-            title="Toggle plot visibility"
-            class="Episode-plot_toggler"
-          />
-          <label for="episode-<%= e.id %>-plot" class="Episode-plot_label">Plot</label>
-          <p class="Episode-plot">
-            <%= e.plot %>
-          </p>
-        </section>
-        <footer class="Episode-foot">
-          <p>Season <%= e.season.number %></p>
-          <p>Episode <%= e.number %></p>
-        </footer>
-        <aside class="Episode-cta">
-          <button phx-click="reveal" value="<%= e.id %>">Reveal Killer</button>
-        </aside>
-      </div>
-      <div class="Episode-back Episode-killer">
-        <%= if @killer && e.id == @killer.episode_id do %>
-          <img
-            src="data:image/jpeg;base64,<%= @killer.picture64 %>"
-            title="<%= @killer.name %>"
-            alt="<%= @killer.name %>"
-            class="Episode-killer_image"
-          />
-          <p class="Episode-killer_name">
-            <%= @killer.name %>
-          </p>
-          <button class="Episode-killer_unreveal" phx-click="unreveal">hide</button>
-        <% end %>
-      </div>
-    </article>
-  <% end %>
-</section>
+<%= render(
+  MurderSheWroteWeb.EpisodesView,
+  "list.html",
+  filtered: @filtered,
+  killer: @killer,
+  socket: @socket
+) %>

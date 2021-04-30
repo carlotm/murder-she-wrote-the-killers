@@ -1,0 +1,48 @@
+<article class="Episode <%= if @killer && @e.id == @killer.episode_id, do: "Episode-reveal" %>">
+  <div class="Episode-front">
+    <%= if @e.poster != "" do %>
+      <div
+        phx-track-static
+        class="Episode-poster"
+        style="background-image: url('<%= Routes.static_path(@socket, "/images/covers/#{@e.poster}") %>')"
+      ></div>
+    <% end %>
+    <header>
+      <h2 class="Episode-title"><%= @e.title %></h2>
+    </header>
+    <section>
+      <input
+        id="episode-<%= @e.id %>-plot"
+        type="checkbox"
+        title="Toggle plot visibility"
+        class="Episode-plot_toggler"
+      />
+      <label for="episode-<%= @e.id %>-plot" class="Episode-plot_label">Plot</label>
+      <p class="Episode-plot">
+        <%= @e.plot %>
+      </p>
+    </section>
+    <footer class="Episode-foot">
+      <p>Season <%= @e.season.number %></p>
+      <p>Episode <%= @e.number %></p>
+    </footer>
+    <aside class="Episode-cta">
+      <button phx-click="reveal" value="<%= @e.id %>">Reveal Killer</button>
+    </aside>
+  </div>
+  <div class="Episode-back Episode-killer">
+    <%= if @killer && @e.id == @killer.episode_id do %>
+      <img
+        src="data:image/jpeg;base64,<%= @killer.picture64 %>"
+        title="<%= @killer.name %>"
+        alt="<%= @killer.name %>"
+        class="Episode-killer_image"
+      />
+      <p class="Episode-killer_name">
+        <%= @killer.name %>
+      </p>
+      <button class="Episode-killer_unreveal" phx-click="unreveal">hide</button>
+    <% end %>
+  </div>
+</article>
+

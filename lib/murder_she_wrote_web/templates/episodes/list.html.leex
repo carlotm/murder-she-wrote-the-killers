@@ -1,0 +1,11 @@
+<section class="Episodes">
+  <%= for e <- @filtered do %>
+    <%= render(
+      MurderSheWroteWeb.EpisodesView,
+      "episode.html",
+      e: e,
+      killer: @killer,
+      socket: @socket
+    ) %>
+  <% end %>
+</section>
