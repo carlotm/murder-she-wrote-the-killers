@@ -13,6 +13,6 @@ defmodule MurderSheWroteWeb.Router do
   scope "/", MurderSheWroteWeb do
     pipe_through :browser_live
     live("/", EpisodesLive)
-    live("/seasons/:seasons", EpisodesLive)
+    live("/episodes/", EpisodesLive)
   end
 end

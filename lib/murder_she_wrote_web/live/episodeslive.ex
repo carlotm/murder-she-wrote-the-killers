@@ -20,12 +20,12 @@ defmodule MurderSheWroteWeb.EpisodesLive do
   end
 
   def handle_params(%{"seasons" => seasons}, _, socket) do
-    send(self(), {:filter, q: socket.assigns.q, selected_seasons: String.split(seasons, "-")})
+    send(self(), {:filter, q: socket.assigns.q, selected_seasons: String.split(seasons, ",")})
 
     socket =
       assign(socket,
         q: socket.assigns.q,
-        selected_seasons: String.split(seasons, "-"),
+        selected_seasons: String.split(seasons, ","),
         loading: true
       )
 
@@ -39,12 +39,12 @@ defmodule MurderSheWroteWeb.EpisodesLive do
   def handle_event("filter", %{"q" => q, "seasons" => seasons}, socket) do
     send(self(), {:filter, q: q, selected_seasons: seasons})
     socket = assign(socket, q: q, selected_seasons: seasons, loading: true)
-    seasons = Enum.join(tl(seasons), "-")
+    seasons = Enum.join(tl(seasons), ",")
 
     if seasons == "" do
       {:noreply, push_patch(socket, to: "/")}
     else
-      {:noreply, push_patch(socket, to: "/seasons/#{seasons}")}
+      {:noreply, push_patch(socket, to: "/episodes?q=#{q}&seasons=#{seasons}")}
     end
   end
 
