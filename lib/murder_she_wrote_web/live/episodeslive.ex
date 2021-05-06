@@ -41,7 +41,7 @@ defmodule MurderSheWroteWeb.EpisodesLive do
     socket = assign(socket, q: q, selected_seasons: seasons, loading: true)
     seasons = Enum.join(tl(seasons), ",")
 
-    if seasons == "" do
+    if seasons == "" and q == "" do
       {:noreply, push_patch(socket, to: "/")}
     else
       {:noreply, push_patch(socket, to: "/episodes?q=#{q}&seasons=#{seasons}")}
