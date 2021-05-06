@@ -39,7 +39,7 @@ defmodule MurderSheWroteWeb.EpisodesLive do
   def handle_event("filter", %{"q" => q, "seasons" => seasons}, socket) do
     send(self(), {:filter, q: q, selected_seasons: seasons})
     socket = assign(socket, q: q, selected_seasons: seasons, loading: true)
-    seasons = Enum.join(tl(seasons), "|")
+    seasons = Enum.join(tl(seasons), "-")
 
     if seasons == "" do
       {:noreply, push_patch(socket, to: "/")}
