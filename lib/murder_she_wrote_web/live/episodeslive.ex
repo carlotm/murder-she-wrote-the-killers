@@ -42,7 +42,7 @@ defmodule MurderSheWroteWeb.EpisodesLive do
     seasons = Enum.join(tl(seasons), "|")
 
     if seasons == "" do
-      {:noreply, socket}
+      {:noreply, push_patch(socket, to: "/")}
     else
       {:noreply, push_patch(socket, to: "/seasons/#{seasons}")}
     end
