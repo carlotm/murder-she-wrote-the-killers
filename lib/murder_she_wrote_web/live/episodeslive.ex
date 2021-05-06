@@ -27,17 +27,15 @@ defmodule MurderSheWroteWeb.EpisodesLive do
 
   def handle_params(_, _, socket), do: {:noreply, socket}
 
+  def handle_event("filter", %{"q" => "", "seasons" => ""}, socket) do
+    {:noreply, push_patch(socket, to: "/")}
+  end
+
   def handle_event("filter", %{"q" => q, "seasons" => seasons}, socket) do
     filters = [q: q, seasons: seasons]
     send(self(), {:filter, filters})
     socket = assign(socket, filters: filters, loading: true)
-
-    if seasons == "" and q == "" do
-      {:noreply, push_patch(socket, to: "/")}
-    else
-      {:noreply,
-       push_patch(socket, to: "/episodes?q=#{q}&seasons=#{Enum.join(tl(seasons), ",")}")}
-    end
+    {:noreply, push_patch(socket, to: "/episodes?q=#{q}&seasons=#{Enum.join(tl(seasons), ",")}")}
   end
 
   def handle_event("reveal", %{"value" => episode_id}, socket) do
