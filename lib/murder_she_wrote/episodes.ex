@@ -16,7 +16,7 @@ defmodule MurderSheWrote.Episodes do
     Repo.all(query)
   end
 
-  def filter_episodes(episodes, q: q, selected_seasons: seasons) do
+  def filter_episodes(episodes, q: q, seasons: seasons) do
     episodes
     |> filter_by_title(q)
     |> filter_by_seasons(seasons)

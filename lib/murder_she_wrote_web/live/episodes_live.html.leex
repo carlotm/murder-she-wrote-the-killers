@@ -1,9 +1,9 @@
 <%= render(
   MurderSheWroteWeb.EpisodesView,
   "filters.html",
-  q: @q,
+  q: Keyword.get(@filters, :q),
   seasons: @seasons,
-  selected_seasons: @selected_seasons,
+  selected_seasons: Keyword.get(@filters, :seasons),
   loading: @loading
 ) %>
 
