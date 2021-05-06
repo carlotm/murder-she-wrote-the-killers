@@ -20,12 +20,12 @@ defmodule MurderSheWroteWeb.EpisodesLive do
   end
 
   def handle_params(%{"seasons" => seasons}, _, socket) do
-    send(self(), {:filter, q: socket.assigns.q, selected_seasons: String.split(seasons, "|")})
+    send(self(), {:filter, q: socket.assigns.q, selected_seasons: String.split(seasons, "-")})
 
     socket =
       assign(socket,
         q: socket.assigns.q,
-        selected_seasons: String.split(seasons, "|"),
+        selected_seasons: String.split(seasons, "-"),
         loading: true
       )
 
