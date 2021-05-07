@@ -528,3 +528,24 @@ h2 {
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
+.MainError {
+    text-align: center;
+    padding-top: var(--aria4x);
+    padding-bottom: var(--aria4x);
+}
+
+.MainError img {
+    border-radius: 100%;
+}
+
+.MainError p {
+    color: var(--white-d);
+    font-size: 18px;
+    margin-top: var(--aria2x);
+}
+
+.MainError p a,
+.MainError p a:visited {
+    color: var(--oro);
+}
