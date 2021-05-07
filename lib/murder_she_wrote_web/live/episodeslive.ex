@@ -1,7 +1,6 @@
 defmodule MurderSheWroteWeb.EpisodesLive do
   use MurderSheWroteWeb, :live_view
   alias MurderSheWrote.Episodes
-  alias MurderSheWroteWeb.Filters
 
   def mount(_params, _session, socket) do
     all_episodes = Episodes.list_episodes()
