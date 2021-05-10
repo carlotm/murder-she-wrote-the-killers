@@ -36,9 +36,7 @@
       <h2>the killers</h2>
     </header>
 
-    <main role="main">
-      <%= @inner_content %>
-    </main>
+    <%= @inner_content %>
 
     <footer class="SiteFooter">
       <p>

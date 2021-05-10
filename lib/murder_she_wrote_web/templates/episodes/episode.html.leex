@@ -1,4 +1,7 @@
-<article class="Episode <%= if @killer && @e.id == @killer.episode_id, do: "Episode-reveal" %>">
+<article
+  id="<%= "s#{@e.season.number}e#{@e.number}" %>"
+  class="Episode <%= if @killer && @e.id == @killer.episode_id, do: "Episode-reveal" %>"
+>
   <div class="Episode-front">
     <%= if @e.poster != "" do %>
       <div
