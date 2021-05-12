@@ -1,9 +1,8 @@
 name: Testing She Wrote
 on: [push]
 jobs:
-  testing:
+  tests:
     runs-on: ubuntu-latest
-    # container: elixir:1.11.4
 
     services:
       postgres:
@@ -44,3 +43,25 @@ jobs:
         run: mix deps.get
       - name: Run tests
         run: mix test
+
+  deploy:
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.1
+      - name: Deploy
+        uses: mhanberg/gigalixir-action@v0.4.0
+        with:
+          GIGALIXIR_APP: murder-she-wrote
+          GIGALIXIR_USERNAME: ${{ secrets.GIGALIXIR_USERNAME }}
+          GIGALIXIR_PASSWORD: ${{ secrets.GIGALIXIR_PASSWORD }}
+          MIGRATIONS: false
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_RSA }}
