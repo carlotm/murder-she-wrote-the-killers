@@ -1,10 +1,10 @@
 defmodule MurderSheWrote.Episodes do
   import Ecto.Query, only: [from: 2]
 
-  alias MurderSheWrote.Repo
   alias MurderSheWrote.Episodes.Episode
-  alias MurderSheWrote.Episodes.Season
   alias MurderSheWrote.Episodes.Killer
+  alias MurderSheWrote.Episodes.Season
+  alias MurderSheWrote.Repo
 
   def list_episodes do
     query = from e in Episode, order_by: [e.season_id, e.number], preload: [:season]
