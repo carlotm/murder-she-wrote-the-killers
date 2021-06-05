@@ -17,6 +17,14 @@ defmodule MurderSheWrote.MixProject do
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
+  #
+  #
+  #
+  #
+  #
+  def app do
+  end
+
   def application do
     [
       mod: {MurderSheWrote.Application, []},
