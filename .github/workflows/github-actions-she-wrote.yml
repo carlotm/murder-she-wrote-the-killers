@@ -31,8 +31,6 @@ jobs:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: ${{ runner.os }}-mix-
-      - name: Penitenziagite
-        run: mix credo
       - name: Copy the fixtures into postgres container
         run: docker exec -d ${{ job.services.postgres.id }} mkdir -p ${{ github.workspace }}/priv/data
       - name: Copy the fixtures into postgres container
@@ -43,6 +41,8 @@ jobs:
         run: docker cp priv/data/episodes.csv ${{ job.services.postgres.id }}:${{ github.workspace }}/priv/data/
       - name: Install dependencies
         run: mix deps.get
+      - name: Penitenziagite
+        run: mix credo
       - name: Run tests
         run: mix test
 
