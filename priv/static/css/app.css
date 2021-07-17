@@ -181,7 +181,7 @@ h1::after {
     background-color: var(--black);
     border-radius: 8px;
     color: var(--white);
-    content: "spoiler alert";
+    content: "spoiler alert!";
     font-family: var(--main-font);
     font-size: 13px;
     font-weight: bold;
