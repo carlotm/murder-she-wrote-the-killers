@@ -7,4 +7,4 @@ deployed at [murder-she-wrote.gigalixirapp.com](https://murder-she-wrote.gigalix
 
 It is made in [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html)
 
-Phoenix LiveView is awesome!
+Phoenix LiveView is excellent!
